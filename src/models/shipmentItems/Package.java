@@ -5,16 +5,16 @@ import strategies.PackageShipmentStrategy;
 import java.math.BigDecimal;
 
 public class Package extends ShipmentItem {
-    private Integer width;
-    private Integer height;
-    private Integer length;
+    private final Integer width;
+    private final Integer height;
+    private final Integer length;
     public Package(Integer width, Integer height, Integer length, Integer weight) {
         super(weight);
         this.width = width;
         this.height = height;
         this.length = length;
         this.type = "Paczka";
-        this.price = new BigDecimal(50.0);
+        this.price = new BigDecimal("50.0");
     }
 
     @Override

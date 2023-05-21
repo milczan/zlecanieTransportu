@@ -8,7 +8,7 @@ public class Container extends ShipmentItem {
     public Container(Integer weight) {
         super(weight);
         this.type = "Kontener";
-        this.price = new BigDecimal(2000.0);
+        this.price = new BigDecimal("2000.0");
     }
 
     @Override

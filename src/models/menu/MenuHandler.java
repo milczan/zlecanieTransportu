@@ -15,8 +15,8 @@ public class MenuHandler {
     /**
      * Console Input Scanner
      */
-    private Scanner input = new Scanner(System.in);
-    private Shipment shipment  = new Shipment();
+    private final Scanner input = new Scanner(System.in);
+    private final Shipment shipment  = new Shipment();
 
     /**
      * Handles provided input in the console from the user.

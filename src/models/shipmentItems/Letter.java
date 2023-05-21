@@ -5,25 +5,19 @@ import strategies.LetterShipmentStrategy;
 import java.math.BigDecimal;
 
 public class Letter extends ShipmentItem {
-    private boolean priority;
+    private final boolean priority;
 
-    private String format;
+    private final String format;
     public Letter(Integer weight, boolean priority, String format) {
         super(weight);
         this.type = "List";
         this.priority = priority;
         this.format = format;
-        if (format == "S") {
-            this.price = new BigDecimal(10.0);
-        }
-        else if (format == "M") {
-            this.price = new BigDecimal(20.0);
-        }
-        else if (format == "L") {
-            this.price = new BigDecimal(30.0);
-        }
-        else {
-            this.price = new BigDecimal(40.0);
+        switch (format) {
+            case "S" -> this.price = new BigDecimal("10.0");
+            case "M" -> this.price = new BigDecimal("20.0");
+            case "L" -> this.price = new BigDecimal("30.0");
+            default -> this.price = new BigDecimal("40.0");
         }
     }
 

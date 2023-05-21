@@ -11,7 +11,7 @@ public class ShipmentAddress implements ShipmentAddressInterface {
     private String city;
     private String country;
     private String postCode;
-    private String type;
+    private final String type;
 
     /**
      * Shipment address constructor

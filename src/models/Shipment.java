@@ -23,19 +23,19 @@ public class Shipment implements ShipmentInterface {
     /**
      * Shipment items list - contains shipment item objects e.g. letters, packages, pallets, containers
      */
-    private List<ShipmentItem> shipmentItems = new ArrayList<>();
+    private final List<ShipmentItem> shipmentItems = new ArrayList<>();
     /**
      * Shipment's sender address
      */
-    private ShipmentAddress senderAddress = new ShipmentAddress("Adres nadawcy");
+    private final ShipmentAddress senderAddress = new ShipmentAddress("Adres nadawcy");
     /**
      * Shipment's receiver address
      */
-    private ShipmentAddress receiverAddress = new ShipmentAddress("Adres odbiorcy");
+    private final ShipmentAddress receiverAddress = new ShipmentAddress("Adres odbiorcy");
     /**
      * Console Input Scanner
      */
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
     /**
      * Shipment's current status
      */
@@ -63,7 +63,7 @@ public class Shipment implements ShipmentInterface {
                 String format = input.nextLine();
                 System.out.println("Czy list priorytetowy? t/n:");
                 String isPriority = input.nextLine();
-                boolean priority = (isPriority.equals("t")) ? true : false;
+                boolean priority = isPriority.equals("t");
                 shipmentItem = ShipmentItemFactory.createLetter(weight, priority, format);
 
             }
@@ -82,8 +82,10 @@ public class Shipment implements ShipmentInterface {
             else if (Pallet.class.equals(shipmentClass)) {
                 shipmentItem = ShipmentItemFactory.createPallet(weight);
             }
-            shipmentItems.add(shipmentItem);
-            System.out.println(shipmentItem.getDetails() + " został(a) dodany(a) do zlecenia");
+            if (shipmentItem != null) {
+                shipmentItems.add(shipmentItem);
+                System.out.println(shipmentItem.getDetails() + " został(a) dodany(a) do zlecenia");
+            }
         } catch (NumberFormatException e) {
             System.out.println("Nieprawidłowa wartość liczbowa. Spróbuj ponownie.");
         }
@@ -122,8 +124,8 @@ public class Shipment implements ShipmentInterface {
         for (ShipmentItem shipmentItem: shipmentItems) {
             System.out.println(shipmentItem.getDetails());
         }
-        System.out.println(senderAddress.toString());
-        System.out.println(receiverAddress.toString());
+        System.out.println(senderAddress);
+        System.out.println(receiverAddress);
         displayPrice();
     }
 
@@ -151,7 +153,7 @@ public class Shipment implements ShipmentInterface {
         String senderPostCode = input.nextLine();
         senderAddress.setPostCode(senderPostCode);
 
-        System.out.println("Dodano " + senderAddress.toString());
+        System.out.println("Dodano " + senderAddress);
 
         System.out.println("Podaj kraj odbiorcy:");
         String receiverCountry = input.nextLine();
@@ -173,7 +175,7 @@ public class Shipment implements ShipmentInterface {
         String receiverPostCode = input.nextLine();
         receiverAddress.setPostCode(receiverPostCode);
 
-        System.out.println("Dodano " + receiverAddress.toString());
+        System.out.println("Dodano " + receiverAddress);
     }
 
     /**
@@ -210,7 +212,7 @@ public class Shipment implements ShipmentInterface {
      */
     @Override
     public BigDecimal calculateShipmentPrice() {
-        BigDecimal priceSum = new BigDecimal(0.0);
+        BigDecimal priceSum = new BigDecimal("0.0");
         for (ShipmentItem shipmentItem : this.shipmentItems) {
             priceSum = priceSum.add(shipmentItem.getPrice());
         }

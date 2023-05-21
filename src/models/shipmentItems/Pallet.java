@@ -8,7 +8,7 @@ public class Pallet extends ShipmentItem {
     public Pallet(Integer weight) {
         super(weight);
         this.type = "Paleta";
-        this.price = new BigDecimal(1000.0);
+        this.price = new BigDecimal("1000.0");
     }
 
     @Override

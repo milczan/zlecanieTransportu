@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public abstract class ShipmentItem implements ShippableInterface {
     protected String type;
-    private Integer weight;
+    private final Integer weight;
     protected BigDecimal price;
 
     public ShipmentItem(Integer weight) {
